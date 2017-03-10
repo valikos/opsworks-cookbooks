@@ -1,0 +1,7 @@
+<% (['development', 'production'] + [@environment]).uniq.each do |env| -%>
+<%= env %>:
+  host: <%= (@redis[:host] || 'localhost').to_s.inspect %>
+<% if @redis[:port] -%>
+  port: <%= (@redis[:port] || 6379).to_i.inspect %>
+<% end -%>
+<% end %>

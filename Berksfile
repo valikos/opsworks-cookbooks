@@ -1,0 +1,12 @@
+source 'https://supermarket.chef.io'
+
+# cookbook 'ming', '=1.2.3'
+cookbook 'yum-epel', '= 0.7.1'
+cookbook 'apt', '= 3.0.0'
+cookbook 'ohai', '= 3.0.1'
+cookbook 'build-essential', '= 3.2.0'
+cookbook 'homebrew', '= 2.1.2'
+cookbook 'nodejs', github: 'redguide/nodejs', tag: 'v2.4.0'
+# cookbook 'nodejs', '~> 2.4.4'
+cookbook 'yum-repoforge', '~> 1.0.0'
+cookbook 'yum', '= 4.2.0'

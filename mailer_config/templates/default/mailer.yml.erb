@@ -1,0 +1,13 @@
+<% (['development', 'production'] + [@environment]).uniq.each do |env| -%>
+<%= env %>:
+  host: <%= (@mailer[:host] || 'localhost').to_s.inspect %>
+  port: <%= (@mailer[:port] || 80).to_i.inspect %>
+  sender: <%= @mailer[:sender].to_s.inspect %>
+<% if @mailer[:ses].present? -%>
+  ses:
+    host: <%= @mailer[:ses][:host].to_s.inspect %>
+    port: <%= @mailer[:ses][:port].to_i.inspect %>
+    username: <%= @mailer[:ses][:username].to_s.inspect %>
+    password: <%= @mailer[:ses][:password].to_s.inspect %>
+<% end -%>
+<% end %>

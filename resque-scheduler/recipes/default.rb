@@ -1,8 +1,8 @@
 node[:deploy].each do |application, deploy|
   next unless deploy[:application_type] == "rails"
 
-  template "/etc/init.d/resque-pool_#{application}" do
-    source "resque-pool.init.erb"
+  template "/etc/init.d/resque-scheduler_#{application}" do
+    source "resque-scheduler.init.erb"
     owner "root"
     group "root"
     mode "0755"
@@ -13,9 +13,9 @@ node[:deploy].each do |application, deploy|
              )
   end
 
-  if node[:resque_pool][:monit]
-    template "/etc/monit/conf.d/resque-pool_#{application}.monitrc" do
-      source "resque-pool.monit.erb"
+  if node[:resque_scheduler][:monit]
+    template "/etc/monit/conf.d/resque-scheduler_#{application}.monitrc" do
+      source "resque-scheduler.monit.erb"
       owner "root"
       group "root"
       mode "0644"
@@ -26,8 +26,8 @@ node[:deploy].each do |application, deploy|
     end
   end
 
-  service "resque-pool_#{application}" do
-    service_name "resque-pool_#{application}"
+  service "resque-scheduler_#{application}" do
+    service_name "resque-scheduler_#{application}"
     supports :start => true, :reload => true, :stop => true, :restart => true
     action [:enable, :start]
   end

@@ -13,18 +13,18 @@ node[:deploy].each do |application, deploy|
              )
   end
 
-  if node[:resque_scheduler][:monit]
-    template "/etc/monit/conf.d/resque-scheduler_#{application}.monitrc" do
-      source "resque-scheduler.monit.erb"
-      owner "root"
-      group "root"
-      mode "0644"
-      variables(:application => application, :current_path => deploy[:current_path])
-    end
-    execute "monit reload" do
-      action :run
-    end
-  end
+  # if node[:resque_scheduler][:monit]
+  #   template "/etc/monit/conf.d/resque-scheduler_#{application}.monitrc" do
+  #     source "resque-scheduler.monit.erb"
+  #     owner "root"
+  #     group "root"
+  #     mode "0644"
+  #     variables(:application => application, :current_path => deploy[:current_path])
+  #   end
+  #   execute "monit reload" do
+  #     action :run
+  #   end
+  # end
 
   service "resque-scheduler_#{application}" do
     service_name "resque-scheduler_#{application}"

@@ -13,7 +13,8 @@
 export SL_NAME=resque-scheduler_rails
 NAME=resque-scheduler_<%= @application %>
 DESC=resque-scheduler_<%= @application %>
-CMD=<%= @current_path %>/script/resque-scheduler
+# CMD=<%= @current_path %>/script/resque-scheduler
+CMD="/usr/local/bin/bundle exec resque-scheduler"
 
 cd <%= @current_path %>
 

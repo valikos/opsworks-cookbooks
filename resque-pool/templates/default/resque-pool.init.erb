@@ -20,7 +20,7 @@ cd <%= @current_path %>
 case "$1" in
   start)
     echo -n "Starting $DESC: "
-    RAILS_ENV=<%= @rails_env %> bundle exec resque-pool --daemon --environment=<%= @rails_env %>
+    RAILS_ENV=<%= @rails_env %> /usr/local/bin/bundle exec resque-pool --daemon --environment=<%= @rails_env %>
     echo "$NAME."
     ;;
   stop)
@@ -32,7 +32,7 @@ case "$1" in
     echo -n "Restarting $DESC: "
     kill -QUIT `cat $PID`
     sleep 1
-    RAILS_ENV=<%= @rails_env %> bundle exec resque-pool --environment=<%= @rails_env %>
+    RAILS_ENV=<%= @rails_env %> /usr/local/bin/bundle exec resque-pool --environment=<%= @rails_env %>
     echo "$NAME."
     ;;
   reload)

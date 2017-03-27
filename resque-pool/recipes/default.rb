@@ -1,16 +1,21 @@
 node[:deploy].each do |application, deploy|
   next unless deploy[:application_type] == "rails"
 
+  environment_variables =
+    OpsWorks::Escape.escape_double_quotes(deploy[:environment_variables])
+    .merge('RAILS_ENV' => deploy[:rails_env])
+
   template "/etc/init.d/resque-pool_#{application}" do
     source "resque-pool.init.erb"
     owner "root"
     group "root"
     mode "0755"
-    variables(:application => application,
-              :current_path => deploy[:current_path],
-              :rails_env => deploy[:rails_env],
-              :app_path => deploy[:deploy_to]
-             )
+    variables(
+      :application => application,
+      :current_path => deploy[:current_path],
+      :app_path => deploy[:deploy_to],
+      :environment => environment_variables
+    )
   end
 
   # if node[:resque_pool][:monit]

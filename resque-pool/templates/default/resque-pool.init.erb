@@ -14,13 +14,14 @@ export SL_NAME=resque-pool_rails
 NAME=resque-pool_<%= @application %>
 DESC=resque-pool_<%= @application %>
 PID=<%= @current_path %>/tmp/pids/resque-pool.pid
+CMD="/usr/local/bin/bundle exec rake resque:pool"
 
 cd <%= @current_path %>
 
 case "$1" in
   start)
     echo -n "Starting $DESC: "
-    RAILS_ENV=<%= @rails_env %> /usr/local/bin/bundle exec resque-pool --daemon --environment=<%= @rails_env %>
+    <%= @environment.map { |k, v| "#{k}=\"#{v}\"" }.join(' ') %> $CMD
     echo "$NAME."
     ;;
   stop)
@@ -32,7 +33,7 @@ case "$1" in
     echo -n "Restarting $DESC: "
     kill -QUIT `cat $PID`
     sleep 1
-    RAILS_ENV=<%= @rails_env %> /usr/local/bin/bundle exec resque-pool --environment=<%= @rails_env %>
+    <%= @environment.map { |k, v| "#{k}=\"#{v}\"" }.join(' ') %> $CMD
     echo "$NAME."
     ;;
   reload)

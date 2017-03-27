@@ -14,14 +14,14 @@ export SL_NAME=resque-scheduler_rails
 NAME=resque-scheduler_<%= @application %>
 DESC=resque-scheduler_<%= @application %>
 # CMD=<%= @current_path %>/script/resque-scheduler
-CMD="/usr/local/bin/bundle exec resque-scheduler"
+CMD="/usr/local/bin/bundle exec rake resque:scheduler"
 
 cd <%= @current_path %>
 
 case "$1" in
   start)
     echo -n "Starting $DESC: "
-    RAILS_ENV=<%= @rails_env %> $CMD start --delay=2
+    <%= @environment.map { |k, v| "#{k}=\"#{v}\"" }.join(' ') %> $CMD start
     echo "$NAME."
     ;;
   stop)
@@ -31,12 +31,12 @@ case "$1" in
     ;;
   restart)
     echo -n "Restarting $DESC: "
-    RAILS_ENV=<%= @rails_env %> $CMD restart --delay=2
+    <%= @environment.map { |k, v| "#{k}=\"#{v}\"" }.join(' ') %> $CMD restart
     echo "$NAME."
     ;;
   reload)
     echo -n "Reloading $DESC configuration: "
-    RAILS_ENV=<%= @rails_env %> $CMD restart --delay=2
+    <%= @environment.map { |k, v| "#{k}=\"#{v}\"" }.join(' ') %> $CMD restart
     echo "$NAME."
     ;;
   *)

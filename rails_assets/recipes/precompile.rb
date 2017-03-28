@@ -21,7 +21,7 @@ node[:deploy].each do |application, deploy|
   execute 'rake assets:precompile' do
     cwd deploy[:current_path]
     # user deploy[:user]
-    command 'bundle exec rake assets:precompile'
+    command 'bundle exec rake assets:precompile --trace'
     environment deploy[:environment]
   end
 

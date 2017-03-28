@@ -1,7 +1,7 @@
 node[:deploy].each do |application, deploy|
   next unless deploy[:application_type] == "rails"
 
-  service "resque-scheduler_#{application}" do
-    action :restart
+  execute "monit restart resque-scheduler_#{application}" do
+    action :run
   end
 end

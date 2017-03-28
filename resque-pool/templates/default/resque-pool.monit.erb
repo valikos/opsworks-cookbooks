@@ -1,5 +1,5 @@
 check process resque-pool_<%= @application %>
   with pidfile "<%= @current_path %>/tmp/pids/resque-pool.pid"
-  start program = "/bin/su -c '/etc/init.d/resque-pool_<%= @application %> start' - deploy" with timeout 120 seconds
-  stop program = "/bin/su -c '/etc/init.d/resque-pool_<%= @application %> stop' - deploy"
+  start program = "/bin/su -lc 'cd <%= @current_path %> && <%= @environment.map { |k, v| "#{k}=\"#{v}\"" }.join(' ') %> /usr/local/bin/bundle exec resque-pool --pidfile <%= @current_path %>/tmp/pids/resque-pool.pid' - deploy" with timeout 60 seconds
+  stop program = "/bin/su -lc 'kill -QUIT `cat <%= @current_path %>/tmp/pids/resque-pool.pid`' - deploy"
   if 5 restarts within 5 cycles then timeout

@@ -18,6 +18,11 @@ node[:deploy].each do |application, deploy|
   #   )
   # end
 
+  cron 'mini_magick_cleanup' do
+    hour '10,22'
+    command 'find /tmp -type f -name "mini_magick*" -atime +1 | xargs rm'
+  end
+
   template ::File.join(node[:monit][:conf_dir], "resque-pool_#{application}.monitrc") do
     source "resque-pool.monit.erb"
     owner "root"

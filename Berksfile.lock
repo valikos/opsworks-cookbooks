@@ -2,6 +2,7 @@ DEPENDENCIES
   apt (= 3.0.0)
   build-essential (= 3.2.0)
   homebrew (= 2.1.2)
+  newrelic-infra (~> 0.4.0)
   nodejs
     git: https://github.com/redguide/nodejs.git
     revision: 0ecec6dd43dcc4cb0f2a650dbb837b5862e5e382
@@ -21,8 +22,9 @@ GRAPH
     seven_zip (>= 0.0.0)
   homebrew (2.1.2)
     build-essential (>= 2.1.2)
-  mingw (2.0.0)
-    seven_zip (>= 0.0.0)
+  newrelic-infra (0.4.0)
+    poise-archive (~> 1.5)
+    poise-service (~> 1.5)
   nodejs (2.4.0)
     apt (>= 0.0.0)
     ark (>= 0.0.0)
@@ -30,6 +32,11 @@ GRAPH
     homebrew (>= 0.0.0)
     yum-epel (>= 0.0.0)
   ohai (3.0.1)
+  poise (2.8.1)
+  poise-archive (1.5.0)
+    poise (~> 2.6)
+  poise-service (1.5.2)
+    poise (~> 2.0)
   seven_zip (2.0.2)
     windows (>= 1.2.2)
   windows (2.0.2)

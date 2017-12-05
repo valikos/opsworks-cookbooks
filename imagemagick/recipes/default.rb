@@ -17,7 +17,7 @@ bash 'unarchive_source' do
   cwd  ::File.dirname(filepath)
 
   code <<-EOH
-    tar zxf #{::File.basename(filepath)} -C #{::File.dirname(filepath)}
+    tar zxf #{::File.basename(filepath)}
   EOH
 
   not_if { ::File.directory?("/tmp/#{version}") }
@@ -27,6 +27,6 @@ bash 'compile_source' do
   cwd  ::File.dirname(filepath)
 
   code <<-EOH
-    cd /tmp/#{version} && ./configure #{flags.join(' ')} && make && make install
+    cd /tmp/ImageMagick-#{version} && ./configure #{flags.join(' ')} && make && make install
   EOH
 end

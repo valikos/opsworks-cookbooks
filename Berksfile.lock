@@ -4,7 +4,7 @@ DEPENDENCIES
   homebrew (= 2.1.2)
   newrelic-infra (~> 0.4.0)
   nodejs
-    git: https://github.com/redguide/nodejs.git
+    git: git://github.com/redguide/nodejs.git
     revision: 0ecec6dd43dcc4cb0f2a650dbb837b5862e5e382
     tag: v2.4.0
   ohai (= 3.0.1)

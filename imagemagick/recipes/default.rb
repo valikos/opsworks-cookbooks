@@ -27,6 +27,6 @@ bash 'compile_source' do
   cwd  ::File.dirname(filepath)
 
   code <<-EOH
-    cd #{version} && ./configure #{flags.join(' ')} && make && make install
+    cd /tmp/#{version} && ./configure #{flags.join(' ')} && make && make install
   EOH
 end
